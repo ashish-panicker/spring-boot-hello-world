@@ -9,7 +9,10 @@ pipeline {
         stage('Clone') {
             steps {
                 echo "📥 Starting code checkout from Git repository..."
-                git 'https://github.com/ashish-panicker/spring-boot-hello-world'
+                steps {
+                     git branch: main,
+                        url: 'https://github.com/ashish-panicker/spring-boot-hello-world'
+                }
             }
         }
 
