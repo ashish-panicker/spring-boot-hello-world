@@ -2,32 +2,45 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven 3.8.6'  // Ensure this is set in Jenkins Global Tools config
+        maven 'Maven 3.8.6'  // Make sure Maven is configured in Jenkins
     }
 
     stages {
         stage('Clone') {
             steps {
+                echo "📥 Starting code checkout from Git repository..."
                 git 'https://github.com/your-username/springboot-jenkins-demo.git'
             }
         }
 
         stage('Build') {
             steps {
-                sh './mvnw clean package -DskipTests'
+                echo "🔨 Building the Spring Boot project with Maven..."
+                sh 'mvn clean package -DskipTests'
             }
         }
 
         stage('Docker Build') {
             steps {
+                echo "🐳 Building Docker image for the Spring Boot app..."
                 sh 'docker build -t springboot-jenkins-demo .'
             }
         }
 
         stage('Run Container') {
             steps {
+                echo "🚀 Running the Docker container on port 8080..."
                 sh 'docker run -d -p 8080:8080 springboot-jenkins-demo'
             }
+        }
+    }
+
+    post {
+        success {
+            echo "✅ Pipeline completed successfully! Application should be running on http://localhost:8080"
+        }
+        failure {
+            echo "❌ Pipeline failed. Check logs above for details."
         }
     }
 }
