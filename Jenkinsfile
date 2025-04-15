@@ -5,14 +5,15 @@ pipeline {
         maven 'Maven 3.9.9'  // Make sure Maven is configured in Jenkins
     }
 
+     environment {
+        GIT_BRANCH = "main"
+    }
+
     stages {
         stage('Clone') {
             steps {
                 echo "📥 Starting code checkout from Git repository..."
-                steps {
-                     git branch: main,
-                        url: 'https://github.com/ashish-panicker/spring-boot-hello-world'
-                }
+                git 'https://github.com/ashish-panicker/spring-boot-hello-world'
             }
         }
 
