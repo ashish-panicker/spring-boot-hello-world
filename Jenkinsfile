@@ -13,7 +13,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo "📥 Starting code checkout from Git repository..."
-                git branch: "${GIT_BRANCH}", url 'https://github.com/ashish-panicker/spring-boot-hello-world'
+                git 'https://github.com/ashish-panicker/spring-boot-hello-world'
             }
         }
 
