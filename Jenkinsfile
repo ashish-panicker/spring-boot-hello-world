@@ -9,7 +9,7 @@ pipeline {
         stage('Clone') {
             steps {
                 echo "📥 Starting code checkout from Git repository..."
-                git 'https://github.com/your-username/springboot-jenkins-demo.git'
+                git 'https://github.com/ashish-panicker/spring-boot-hello-world.git'
             }
         }
 
